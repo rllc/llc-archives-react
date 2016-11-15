@@ -20,18 +20,16 @@ class MainPanel extends React.Component {
 
   componentWillMount() {
     console.log('MainPanel componentWillMount');
-    var searchBase = '';
 
-    //some logic to decide if we want to display sermons for all congregations or just a specific one
-    searchBase = 'sermons';
-    console.log('Searching in ', searchBase);
 
-    this.ref = base.fetch(searchBase, {
+    this.ref = base.fetch('sermons', {
       context: this,
       state: 'sermons',
       asArray: true,
       queries: {
-        limitToFirst: 20
+        limitToLast: 20,
+        orderByChild: 'bucketID',
+        equalTo: 'glendale-archives'
       },
       then(data){
           this.setState({ sermons: data});
@@ -52,8 +50,7 @@ class MainPanel extends React.Component {
     var createItem = function(item, index) {
       return (
         <li key={ index }>
-          { item.fileUrl }
-          { item.key }
+          { item.bucketID } - { item.fileUrl } - { item.key } - { item.date }
         </li>
       );
     }
