@@ -58,7 +58,7 @@ class MainPanel extends React.Component {
       );
     }
 
-    if (this.state.loading == true) {
+    if (this.state.loading === true) {
       console.log('Still loading sermons...');
       return <ul>Loading...</ul>;
     }
