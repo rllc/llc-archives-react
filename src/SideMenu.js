@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {List, ListItem} from 'material-ui/List';
 import ActionInfo from 'material-ui/svg-icons/action/info';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
 
 import Rebase from 're-base';
 var base = Rebase.createClass({
@@ -16,9 +18,12 @@ class SideMenu extends React.Component {
     super(props);
     this.state = {
       congregations: [],
-      loading: true
+      loading: true,
+      open: true
     }
   }
+
+  handleToggle = () => this.setState({open: !this.state.open});
 
   componentWillMount() {
     console.log('SideMenu componentWillMount');
@@ -43,7 +48,7 @@ class SideMenu extends React.Component {
     var createItem = function(item, index) {
       console.log('inside createItem');
       return (
-        <ListItem primaryText={ item.displayName } rightIcon={<ActionInfo />} />
+        <MenuItem>{item.displayName}</MenuItem>
       );
     };
 
@@ -54,7 +59,11 @@ class SideMenu extends React.Component {
       return <ul>Loading...</ul>;
     }
     else {
-      return <List>{ this.state.congregations.map(createItem) }</List>;
+      return (
+        <Drawer open={this.state.open}>
+          { this.state.congregations.map(createItem) }
+        </Drawer>
+      )
     }
   }
 }

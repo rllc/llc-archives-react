@@ -11,6 +11,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className="App">
+          <TopBar />
           <div className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <h2>Welcome to React!!!</h2>
@@ -20,7 +21,7 @@ class App extends Component {
           </p>
           <SideMenu />
           <MainPanel />
-          <TopBar />
+
         </div>
       </MuiThemeProvider>
     );
