@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {List, ListItem} from 'material-ui/List';
+import ActionInfo from 'material-ui/svg-icons/action/info';
 
 import Rebase from 're-base';
 var base = Rebase.createClass({
@@ -41,9 +43,7 @@ class SideMenu extends React.Component {
     var createItem = function(item, index) {
       console.log('inside createItem');
       return (
-        <li key={ index }>
-          { item.displayName }
-        </li>
+        <ListItem primaryText={ item.displayName } rightIcon={<ActionInfo />} />
       );
     };
 
@@ -54,7 +54,7 @@ class SideMenu extends React.Component {
       return <ul>Loading...</ul>;
     }
     else {
-      return <ul>{ this.state.congregations.map(createItem) }</ul>;
+      return <List>{ this.state.congregations.map(createItem) }</List>;
     }
   }
 }

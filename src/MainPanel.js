@@ -1,6 +1,8 @@
 import React from 'react';
-
 import Rebase from 're-base';
+import {List, ListItem} from 'material-ui/List';
+import ActionInfo from 'material-ui/svg-icons/action/info';
+
 var base = Rebase.createClass({
   apiKey: "AIzaSyD-uM9lWp5_MTYBauHlsbzJUhUkNE53zh4",
   databaseURL: "https://llc-archives.firebaseio.com",
@@ -49,18 +51,16 @@ class MainPanel extends React.Component {
     var _this = this;
     var createItem = function(item, index) {
       return (
-        <li key={ index }>
-          { item.bucketID } - { item.fileUrl } - { item.key } - { item.date }
-        </li>
+        <ListItem primaryText={ item.key } rightIcon={<ActionInfo />} />
       );
     }
 
-    if (this.state.loading == true) {
+    if (this.state.loading === true) {
       console.log('Still loading sermons...');
       return <ul>Loading...</ul>;
     }
     else {
-      return <ul>{ this.state.sermons.map(createItem) }</ul>;
+      return <List>{ this.state.sermons.map(createItem) }</List>;
     }
   }
 }
