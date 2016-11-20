@@ -21,9 +21,10 @@ class App extends Component {
       congregations: [],
       selectedCongregation: 0,
       loading: true,
-      sideMenuOpen: false
+      sideMenuOpen: true
     }
     this.handleToggle = this.handleToggle.bind(this);
+    this.selectCongregation = this.selectCongregation.bind(this);
   }
 
   componentWillMount() {
@@ -48,6 +49,10 @@ class App extends Component {
     this.setState({sideMenuOpen: !this.state.sideMenuOpen});
   }
 
+  selectCongregation(index) {
+    this.setState({selectedCongregation : index});
+  }
+
   render() {
     return (
       <MuiThemeProvider>
@@ -55,20 +60,15 @@ class App extends Component {
           <TopBar
             sideMenuOpen={this.state.sideMenuOpen}
             onChange={this.handleToggle.bind(this)} />
-          <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Welcome to React!!!</h2>
-          </div>
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
           <SideMenu
             base={base}
             sideMenuOpen={this.state.sideMenuOpen}
-            onChange={this.handleToggle.bind(this)}
+            onChange={this.selectCongregation.bind(this)}
             congregations={this.state.congregations} />
-          <MainPanel base={base} />
-
+          <MainPanel
+            base={base}
+            sideMenuOpen={this.state.sideMenuOpen}
+            selectedCongregation={this.state.congregations[this.state.selectedCongregation]} />
         </div>
       </MuiThemeProvider>
     );

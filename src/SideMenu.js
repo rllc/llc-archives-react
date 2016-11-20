@@ -1,33 +1,34 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
+import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 
 class SideMenu extends React.Component {
   constructor(props){
     super(props);
-    this.handleChange = this.handleChange.bind(this);
+    this.selectCongregation = this.selectCongregation.bind(this);
   }
 
-  handleChange(e) {
-    this.props.onChange(e.target.value);
-  }
-
-  componentWillUnMount() {
-    this.props.base.removeBinding(this.ref);
+  selectCongregation(event, menuItem, index) {
+    this.props.onChange(index);
   }
 
   render() {
     const sideMenuOpen = this.props.sideMenuOpen;
-
+    const self = this;
     var createItem = function(item, index) {
       return (
-        <MenuItem key={item.bucketID}>{item.displayName}</MenuItem>
+        <MenuItem
+          key={item.bucketID}> {item.displayName}</MenuItem>
       );
     };
 
     return (
       <Drawer open={sideMenuOpen}>
-        { this.props.congregations.map(createItem) }
+        <Menu
+          onItemTouchTap={self.selectCongregation} >
+          { this.props.congregations.map(createItem) }
+        </Menu>
       </Drawer>
     )
   }
