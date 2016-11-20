@@ -1,13 +1,7 @@
 import React from 'react';
 import {List, ListItem} from 'material-ui/List';
-import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
-import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-import ActionInfo from 'material-ui/svg-icons/action/info';
-import Divider from 'material-ui/Divider';
-import Avatar from 'material-ui/Avatar';
-import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
+import {grey400, darkBlack} from 'material-ui/styles/colors';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -30,19 +24,6 @@ const rightIconMenu = (
   </IconMenu>
 );
 
-const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
-  gridList: {
-    width: 500,
-    height: 450,
-    overflowY: 'auto',
-  },
-};
-
 class MainPanel extends React.Component {
   constructor(props){
     super(props);
@@ -61,7 +42,6 @@ class MainPanel extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("props : " + nextProps);
     if (this.props.selectedCongregation &&
       (this.props.selectedCongregation.bucketID !== nextProps.selectedCongregation.bucketID)) {
         this.setState({
@@ -93,12 +73,6 @@ class MainPanel extends React.Component {
       contentStyle.marginLeft = '256px';
     }
 
-    var createItem = function(item, index) {
-      return (
-        <ListItem primaryText={ item.key } key={item.key} rightIcon={<ActionInfo />} />
-      );
-    }
-
     if (this.state.loading === true) {
       console.log('Still loading sermons...');
       return <ul>Loading...</ul>;
@@ -111,6 +85,7 @@ class MainPanel extends React.Component {
         <List>
           {this.state.sermons.map((sermon) => (
             <ListItem
+              key={sermon.key}
               rightIconButton={rightIconMenu}
               primaryText={
                 <p>

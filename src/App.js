@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SideMenu from './SideMenu.js';
 import MainPanel from './MainPanel.js';
 import TopBar from './TopBar.js';
-import logo from './logo.svg';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Rebase from 're-base';
 import './App.css';
