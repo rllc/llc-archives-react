@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SideMenu from './SideMenu.js';
 import MainPanel from './MainPanel.js';
 import TopBar from './TopBar.js';
-import logo from './logo.svg';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Rebase from 're-base';
 import './App.css';
@@ -19,11 +18,12 @@ class App extends Component {
     super(props);
     this.state = {
       congregations: [],
-      selectedCongregation: 0,
+      selectedCongregation: null,
       loading: true,
-      sideMenuOpen: false
+      sideMenuOpen: true
     }
     this.handleToggle = this.handleToggle.bind(this);
+    this.selectCongregation = this.selectCongregation.bind(this);
   }
 
   componentWillMount() {
@@ -48,6 +48,13 @@ class App extends Component {
     this.setState({sideMenuOpen: !this.state.sideMenuOpen});
   }
 
+  selectCongregation(selection) {
+    var selectedCongregation = this.state.congregations.find(function(congregation) {
+      return congregation.bucketID === selection.key;
+    });
+    this.setState({selectedCongregation : selectedCongregation});
+  }
+
   render() {
     return (
       <MuiThemeProvider>
@@ -55,20 +62,15 @@ class App extends Component {
           <TopBar
             sideMenuOpen={this.state.sideMenuOpen}
             onChange={this.handleToggle.bind(this)} />
-          <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Welcome to React!!!</h2>
-          </div>
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
           <SideMenu
             base={base}
             sideMenuOpen={this.state.sideMenuOpen}
-            onChange={this.handleToggle.bind(this)}
+            onChange={this.selectCongregation.bind(this)}
             congregations={this.state.congregations} />
-          <MainPanel base={base} />
-
+          <MainPanel
+            base={base}
+            sideMenuOpen={this.state.sideMenuOpen}
+            selectedCongregation={this.state.selectedCongregation} />
         </div>
       </MuiThemeProvider>
     );
