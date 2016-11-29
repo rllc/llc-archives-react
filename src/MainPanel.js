@@ -54,7 +54,7 @@ class MainPanel extends React.Component {
         queries: {
           limitToLast: 20,
           orderByChild: 'bucketID',
-          equalTo: this.props.selectedCongregation.bucketID
+          equalTo: nextProps.selectedCongregation.bucketID
         },
         then(data){
             this.setState({

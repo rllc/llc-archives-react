@@ -10,7 +10,7 @@ class SideMenu extends React.Component {
   }
 
   selectCongregation(event, menuItem, index) {
-    this.props.onChange(index);
+    this.props.onChange(menuItem);
   }
 
   render() {

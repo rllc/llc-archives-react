@@ -18,7 +18,7 @@ class App extends Component {
     super(props);
     this.state = {
       congregations: [],
-      selectedCongregation: 0,
+      selectedCongregation: null,
       loading: true,
       sideMenuOpen: true
     }
@@ -48,8 +48,11 @@ class App extends Component {
     this.setState({sideMenuOpen: !this.state.sideMenuOpen});
   }
 
-  selectCongregation(index) {
-    this.setState({selectedCongregation : index});
+  selectCongregation(selection) {
+    var selectedCongregation = this.state.congregations.find(function(congregation) {
+      return congregation.bucketID === selection.key;
+    });
+    this.setState({selectedCongregation : selectedCongregation});
   }
 
   render() {
@@ -67,7 +70,7 @@ class App extends Component {
           <MainPanel
             base={base}
             sideMenuOpen={this.state.sideMenuOpen}
-            selectedCongregation={this.state.congregations[this.state.selectedCongregation]} />
+            selectedCongregation={this.state.selectedCongregation} />
         </div>
       </MuiThemeProvider>
     );
