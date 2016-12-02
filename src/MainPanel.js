@@ -51,9 +51,7 @@ class MainPanel extends React.Component {
         state: 'sermons',
         asArray: true,
         queries: {
-          limitToLast: 20,
-          orderByChild: 'bucketID',
-          equalTo: nextProps.selectedCongregation.bucketID
+          orderByChild: 'date'
         },
         then(data){
             this.setState({
@@ -82,9 +80,9 @@ class MainPanel extends React.Component {
 
         <List>
           {this.state.sermons.filter((sermon) => (
-            sermon.published === true
+            ((sermon.published === true) && (sermon.bucketID === this.props.selectedCongregation.bucketID))
           ))
-            .map((sermon) => (
+            .reverse().map((sermon) => (
             <ListItem
               key={sermon.key}
               rightIconButton={rightIconMenu}
