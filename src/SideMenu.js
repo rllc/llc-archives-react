@@ -1,34 +1,19 @@
 import React from 'react';
-import Drawer from 'material-ui/Drawer';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
+import {Drawer} from 'react-mdl/lib/Layout';
+import {List, ListItem, ListItemContent} from 'react-mdl/lib/List'
 
 class SideMenu extends React.Component {
-  constructor(props){
-    super(props);
-    this.selectCongregation = this.selectCongregation.bind(this);
-  }
-
-  selectCongregation(event, menuItem, index) {
-    this.props.onChange(menuItem);
-  }
 
   render() {
-    const sideMenuOpen = this.props.sideMenuOpen;
-    const self = this;
-    var createItem = function(item, index) {
-      return (
-        <MenuItem
-          key={item.bucketID}> {item.displayName}</MenuItem>
-      );
-    };
-
     return (
-      <Drawer open={sideMenuOpen}>
-        <Menu
-          onItemTouchTap={self.selectCongregation} >
-          { this.props.congregations.map(createItem) }
-        </Menu>
+      <Drawer title="Congregations">
+        <List>
+          { this.props.congregations.map((congregation) => (
+            <ListItem key={congregation.key} onClick={() => { this.props.selectCongregation(congregation) }}>
+              <ListItemContent avatar="person">{congregation.displayName}</ListItemContent>
+            </ListItem>
+          ))}
+        </List>
       </Drawer>
     )
   }

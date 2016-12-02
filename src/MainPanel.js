@@ -1,28 +1,5 @@
 import React from 'react';
-import {List, ListItem} from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
-import {grey400, darkBlack} from 'material-ui/styles/colors';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-
-const iconButtonElement = (
-  <IconButton
-    touch={true}
-    tooltip="more"
-    tooltipPosition="bottom-left"
-  >
-    <MoreVertIcon color={grey400} />
-  </IconButton>
-);
-
-const rightIconMenu = (
-  <IconMenu iconButtonElement={iconButtonElement}>
-    <MenuItem>Download</MenuItem>
-    <MenuItem>Edit</MenuItem>
-    <MenuItem>Delete</MenuItem>
-  </IconMenu>
-);
+import {List, ListItem, ListItemContent} from 'react-mdl/lib/List'
 
 class MainPanel extends React.Component {
   constructor(props){
@@ -31,10 +8,6 @@ class MainPanel extends React.Component {
       sermons: [],
       loading: true
     }
-  }
-
-  componentWillMount() {
-
   }
 
   componentWillUnMount() {
@@ -64,44 +37,24 @@ class MainPanel extends React.Component {
   }
 
   render() {
-
-    const contentStyle = {  transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
-    if (this.props.sideMenuOpen) {
-      contentStyle.marginLeft = '256px';
-    }
-
     if (this.state.loading === true) {
-      return <ul>Loading...</ul>;
+      return <h1>Loading...</h1>;
     }
     else {
       return  (
-        <div style={contentStyle}>
-
-
         <List>
-          {this.state.sermons.filter((sermon) => (
+        {
+          this.state.sermons.filter((sermon) => (
             ((sermon.published === true) && (sermon.bucketID === this.props.selectedCongregation.bucketID))
-          ))
-            .reverse().map((sermon) => (
-            <ListItem
-              key={sermon.key}
-              rightIconButton={rightIconMenu}
-              primaryText={
-                <p>
+          )).reverse().map((sermon) => (
+              <ListItem key={sermon.key} twoLine style={{textAlign: 'center'}}>
+                <ListItemContent subtitle={sermon.comments}>
                   {sermon.minister} : {new Date(sermon.date).toLocaleDateString()} : {sermon.bibleText}
-                </p>
-              }
-              secondaryText={
-                <p>
-                  <span style={{color: darkBlack}}>{sermon.comments}</span><br />
-                </p>
-              }
-              secondaryTextLines={1}
-            />
+                </ListItemContent>
+              </ListItem>
           ))
         }
         </List>
-        </div>
       )
     }
   }
