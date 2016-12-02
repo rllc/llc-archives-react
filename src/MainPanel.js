@@ -25,9 +25,7 @@ class MainPanel extends React.Component {
         state: 'sermons',
         asArray: true,
         queries: {
-          limitToLast: 20,
-          orderByChild: 'bucketID',
-          equalTo: nextProps.selectedCongregation.bucketID
+          orderByChild: 'date'
         },
         then(data){
             this.setState({
@@ -47,7 +45,9 @@ class MainPanel extends React.Component {
       return  (
         <List>
         {
-          this.state.sermons.map((sermon) => (
+          this.state.sermons.filter((sermon) => (
+            ((sermon.published === true) && (sermon.bucketID === this.props.selectedCongregation.bucketID))
+          )).reverse().map((sermon) => (
               <ListItem key={sermon.key} twoLine style={{textAlign: 'center'}}>
                 <ListItemContent subtitle={sermon.comments}>
                   {sermon.minister} : {new Date(sermon.date).toLocaleDateString()} : {sermon.bibleText}
