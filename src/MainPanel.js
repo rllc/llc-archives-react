@@ -15,8 +15,7 @@ class MainPanel extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.selectedCongregation &&
-      (this.props.selectedCongregation.bucketID !== nextProps.selectedCongregation.bucketID)) {
+    if (nextProps && nextProps.selectedCongregation && nextProps.selectedCongregation.bucketID) {
         this.setState({
           loading:true
         });
