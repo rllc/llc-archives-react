@@ -81,7 +81,10 @@ class MainPanel extends React.Component {
 
 
         <List>
-          {this.state.sermons.map((sermon) => (
+          {this.state.sermons.filter((sermon) => (
+            sermon.published === true
+          ))
+            .map((sermon) => (
             <ListItem
               key={sermon.key}
               rightIconButton={rightIconMenu}
