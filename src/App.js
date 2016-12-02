@@ -19,28 +19,45 @@ class App extends Component {
     super(props);
     this.state = {
       congregations: [],
+      sermons: [],
       selectedCongregation: null,
-      loading: true,
+      sermonsLoading: true,
+      congregationsLoading: true
     }
     this.selectCongregation = this.selectCongregation.bind(this);
   }
 
   componentWillMount() {
-    this.ref = base.fetch('congregations', {
+    this.congregationsRef = base.fetch('congregations', {
       context: this,
       state: 'congregations',
       asArray: true,
       then(data){
         this.setState({
           congregations: data,
-          loading: false
+          congregationsLoading: false
         });
+      }
+    });
+    this.sermonsRef = base.fetch('sermons', {
+      context: this,
+      state: 'sermons',
+      asArray: true,
+      queries: {
+        orderByChild: 'date'
+      },
+      then(data){
+          this.setState({
+            sermons: data,
+            sermonsLoading:false
+          });
       }
     });
   }
 
   componentWillUnMount() {
-    base.removeBinding(this.ref);
+    base.removeBinding(this.congregationsRef);
+    base.removeBinding(this.sermonsRef);
   }
 
   selectCongregation(selection) {
@@ -62,6 +79,7 @@ class App extends Component {
           <Content>
             <MainPanel
               base={base}
+              sermons={this.state.sermons}
               selectedCongregation={this.state.selectedCongregation} />
           </Content>
       </Layout>
