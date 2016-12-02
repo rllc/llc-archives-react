@@ -22,7 +22,7 @@ class TopBar extends React.Component {
     return (
       <div style={contentStyle}>
       <AppBar
-        title="LLC Archived Sermons"
+        title={this.props.selectedCongregation ? this.props.selectedCongregation.displayName : 'Recent Sermons'}
         onLeftIconButtonTouchTap={this.handleChange}
         iconElementRight={<TextField hintText="Search"/>} />
 

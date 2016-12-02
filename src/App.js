@@ -61,6 +61,7 @@ class App extends Component {
         <div className="App">
           <TopBar
             sideMenuOpen={this.state.sideMenuOpen}
+            selectedCongregation={this.state.selectedCongregation}
             onChange={this.handleToggle.bind(this)} />
           <SideMenu
             base={base}
