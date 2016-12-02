@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import SideMenu from './SideMenu.js';
 import MainPanel from './MainPanel.js';
 import TopBar from './TopBar.js';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Rebase from 're-base';
 import './App.css';
+
+import {Content, Layout} from 'react-mdl/lib/Layout';
 
 var base = Rebase.createClass({
   apiKey: "AIzaSyD-uM9lWp5_MTYBauHlsbzJUhUkNE53zh4",
@@ -20,9 +21,7 @@ class App extends Component {
       congregations: [],
       selectedCongregation: null,
       loading: true,
-      sideMenuOpen: true
     }
-    this.handleToggle = this.handleToggle.bind(this);
     this.selectCongregation = this.selectCongregation.bind(this);
   }
 
@@ -44,36 +43,28 @@ class App extends Component {
     base.removeBinding(this.ref);
   }
 
-  handleToggle(value) {
-    this.setState({sideMenuOpen: !this.state.sideMenuOpen});
-  }
-
   selectCongregation(selection) {
     var selectedCongregation = this.state.congregations.find(function(congregation) {
-      return congregation.bucketID === selection.key;
+      return congregation.bucketID === selection.bucketID;
     });
     this.setState({selectedCongregation : selectedCongregation});
   }
 
   render() {
     return (
-      <MuiThemeProvider>
-        <div className="App">
+	    <Layout fixedHeader fixedDrawer>
           <TopBar
-            sideMenuOpen={this.state.sideMenuOpen}
-            selectedCongregation={this.state.selectedCongregation}
-            onChange={this.handleToggle.bind(this)} />
+            selectedCongregation={this.state.selectedCongregation}/>
           <SideMenu
             base={base}
-            sideMenuOpen={this.state.sideMenuOpen}
-            onChange={this.selectCongregation.bind(this)}
+            selectCongregation={this.selectCongregation}
             congregations={this.state.congregations} />
-          <MainPanel
-            base={base}
-            sideMenuOpen={this.state.sideMenuOpen}
-            selectedCongregation={this.state.selectedCongregation} />
-        </div>
-      </MuiThemeProvider>
+          <Content>
+            <MainPanel
+              base={base}
+              selectedCongregation={this.state.selectedCongregation} />
+          </Content>
+      </Layout>
     );
   }
 }
