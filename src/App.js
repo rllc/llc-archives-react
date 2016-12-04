@@ -21,10 +21,12 @@ class App extends Component {
       congregations: [],
       sermons: [],
       selectedCongregation: null,
+      searchTerm: "",
       sermonsLoading: true,
       congregationsLoading: true
     }
     this.selectCongregation = this.selectCongregation.bind(this);
+    this.searchForValue = this.searchForValue.bind(this);
   }
 
   componentWillMount() {
@@ -65,13 +67,19 @@ class App extends Component {
       return congregation.bucketID === selection.bucketID;
     });
     this.setState({selectedCongregation : selectedCongregation});
+    this.setState({searchTerm : ""})
+  }
+
+  searchForValue(term) {
+    this.setState({searchTerm : term})
   }
 
   render() {
     return (
 	    <Layout fixedHeader fixedDrawer>
           <TopBar
-            selectedCongregation={this.state.selectedCongregation}/>
+            selectedCongregation={this.state.selectedCongregation}
+            searchForValue={this.searchForValue}/>
           <SideMenu
             base={base}
             selectCongregation={this.selectCongregation}
@@ -80,7 +88,8 @@ class App extends Component {
             <MainPanel
               base={base}
               sermons={this.state.sermons}
-              selectedCongregation={this.state.selectedCongregation} />
+              selectedCongregation={this.state.selectedCongregation}
+              searchTerm={this.state.searchTerm}/>
           </Content>
       </Layout>
     );
