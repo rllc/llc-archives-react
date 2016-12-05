@@ -1,19 +1,18 @@
 import React from 'react';
-import {Drawer} from 'react-mdl/lib/Layout';
-import {List, ListItem, ListItemContent} from 'react-mdl/lib/List'
+import {Drawer, Navigation} from 'react-mdl/lib/Layout';
 
 class SideMenu extends React.Component {
 
   render() {
     return (
       <Drawer title="Congregations">
-        <List>
+        <Navigation>
           { this.props.congregations.map((congregation) => (
-            <ListItem key={congregation.key} onClick={() => { this.props.selectCongregation(congregation) }}>
-              <ListItemContent avatar="person">{congregation.displayName}</ListItemContent>
-            </ListItem>
+            <a key={congregation.key} onClick={() => { this.props.selectCongregation(congregation) }} href="#">
+              {congregation.displayName}
+            </a>
           ))}
-        </List>
+        </Navigation>
       </Drawer>
     )
   }
