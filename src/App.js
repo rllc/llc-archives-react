@@ -82,6 +82,7 @@ class App extends Component {
             searchForValue={this.searchForValue}/>
           <SideMenu
             base={base}
+            selectedCongregation={this.state.selectedCongregation}
             selectCongregation={this.selectCongregation}
             congregations={this.state.congregations}
             sermons={this.state.sermons} />
