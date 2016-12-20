@@ -83,7 +83,8 @@ class App extends Component {
           <SideMenu
             base={base}
             selectCongregation={this.selectCongregation}
-            congregations={this.state.congregations} />
+            congregations={this.state.congregations}
+            sermons={this.state.sermons} />
           <Content>
             <MainPanel
               base={base}

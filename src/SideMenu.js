@@ -1,15 +1,23 @@
 import React from 'react';
 import {Drawer, Navigation} from 'react-mdl/lib/Layout';
+import Badge from 'react-mdl/lib/Badge';
 
 class SideMenu extends React.Component {
 
+  sermonCount(congregation) {
+    return this.props.sermons.filter((sermon) => (
+      sermon.bucketID === congregation.bucketID
+    )).length
+  }
+
   render() {
+    const self = this;
     return (
       <Drawer title="Congregations">
         <Navigation>
-          { this.props.congregations.map((congregation) => (
-            <a key={congregation.key} onClick={() => { this.props.selectCongregation(congregation) }} href="#">
-              {congregation.displayName}
+          { self.props.congregations.map((congregation) => (
+            <a key={congregation.key} onClick={() => { self.props.selectCongregation(congregation) }} href="#">
+                <Badge text={ self.sermonCount(congregation) }>{congregation.displayName}</Badge>
             </a>
           ))}
         </Navigation>
