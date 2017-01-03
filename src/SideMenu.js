@@ -10,6 +10,14 @@ class SideMenu extends React.Component {
     )).length
   }
 
+  componentDidUpdate(prevProps, prevState){
+    var layout = document.querySelector('.mdl-layout');
+    var drawer = document.querySelector('.mdl-layout__drawer');
+    if (layout.classList.contains('is-small-screen') && drawer.classList.contains('is-visible')) {
+      layout.MaterialLayout.toggleDrawer();
+    }
+  }
+
   isSelected(congregation) {
     return (
       congregation != null &&
@@ -27,6 +35,9 @@ class SideMenu extends React.Component {
     return (
       <Drawer title="Congregations">
         <Navigation>
+          <a key='recent' onClick={() => { self.props.selectCongregation(null) }} href="#">
+              <Badge text={self.props.sermons.length}>All</Badge>
+          </a>
           { self.props.congregations.map((congregation) => (
             <a key={congregation.key}
               style={(this.isSelected(congregation)) ? selectedStyle : {}}

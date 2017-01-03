@@ -63,9 +63,12 @@ class App extends Component {
   }
 
   selectCongregation(selection) {
-    var selectedCongregation = this.state.congregations.find(function(congregation) {
-      return congregation.bucketID === selection.bucketID;
-    });
+    var selectedCongregation;
+    if (selection) {
+      selectedCongregation = this.state.congregations.find(function(congregation) {
+        return congregation.bucketID === selection.bucketID;
+      });
+    }
     this.setState({selectedCongregation : selectedCongregation});
     this.setState({searchTerm : ""})
   }

@@ -9,7 +9,7 @@ class Sermon extends React.Component {
         <ListItem key={this.props.sermon.key} threeLine>
           <ListItemContent avatar="person" subtitle={this.props.sermon.bibleText + ' ' + this.props.sermon.comments}>{this.props.sermon.minister} : {new Date(this.props.sermon.date).toLocaleDateString()}</ListItemContent>
           <ListItemAction>
-            <a href="#"><Icon name="play_circle_filled" /></a>
+            <a href={this.props.sermon.fileUrl}><Icon name="play_circle_filled" /></a>
           </ListItemAction>
         </ListItem>
       )
