@@ -23,6 +23,9 @@ class SideMenu extends React.Component {
     return (
       <Drawer title="Congregations">
         <Navigation>
+          <a key='recent' onClick={() => { self.props.selectCongregation(null) }} href="#">
+              <Badge text={self.props.sermons.length}>All</Badge>
+          </a>
           { self.props.congregations.map((congregation) => (
             <a key={congregation.key} onClick={() => { self.props.selectCongregation(congregation) }} href="#">
                 <Badge text={ self.sermonCount(congregation) }>{congregation.displayName}</Badge>
