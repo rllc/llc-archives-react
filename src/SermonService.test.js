@@ -121,3 +121,10 @@ it('grabs the latest sermons when no search term is specified and no congregatio
   expect(filteredSermons[1].date).toBe('2016-08-28T00:00:00')
   expect(filteredSermons[2].date).toBe('2016-07-31T00:00:00')
 });
+
+it('search is case insensitive', () => {
+  const filteredSermons = SermonService.filter(sermons, 'nevala', null)
+  expect(filteredSermons.length).toBe(2)
+  expect(filteredSermons[0].date).toBe('2016-06-26T00:00:00')
+  expect(filteredSermons[1].date).toBe('2015-05-14T00:00:00')
+});
