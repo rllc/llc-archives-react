@@ -2,7 +2,9 @@ import React from 'react';
 import {Header, HeaderRow} from 'react-mdl/lib/Layout';
 import Textfield from 'react-mdl/lib/Textfield';
 
+
 class TopBar extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -13,8 +15,6 @@ class TopBar extends React.Component {
     this.setState({value: event.target.value});
     this.props.searchForValue(event.target.value);
   }
-
-
 
   render(){
     return (
