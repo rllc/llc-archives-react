@@ -2,6 +2,7 @@ import React from 'react'
 import {Layout, Drawer, Navigation, Header, HeaderRow, Content} from 'react-mdl/lib/Layout';
 import Textfield from 'react-mdl/lib/Textfield';
 import NavLink from './NavLink';
+import CongregationLink from './CongregationLink';
 
 class Sermons extends React.Component {
 
@@ -9,18 +10,6 @@ class Sermons extends React.Component {
     super(props);
     this.state = {searchTerm: ''};
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  publishedSermonCount(congregation) {
-    return this.props.sermons.filter((sermon) => (
-      sermon.bucketID === congregation.bucketID && sermon.published === true
-    )).length
-  }
-
-  unpublishedSermonCount(congregation) {
-    return this.props.sermons.filter((sermon) => (
-      sermon.bucketID === congregation.bucketID && sermon.published === false
-    )).length
   }
 
   formatHeadline() {
@@ -71,18 +60,14 @@ class Sermons extends React.Component {
 
         <NavLink
           to={"/sermons/all"}
-          key={'sermons'}
-          activeClassName="active" >
+          key={'sermons'}>
             All ({self.props.sermons.length})
           </NavLink>
         { this.props.congregations.map((congregation) => (
-
-          <NavLink
-            to={"/sermons/" + congregation.bucketID}
+          <CongregationLink
             key={congregation.key}
-            activeClassName="active" >
-              {congregation.displayName + " (" + self.publishedSermonCount(congregation) + ")"}
-            </NavLink>
+            sermons={self.props.sermons}
+            congregation={congregation} />
         ))}
 
         </Navigation>
