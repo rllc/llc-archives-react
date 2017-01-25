@@ -37,8 +37,7 @@ class CongregationLink extends React.Component {
       <NavLink
         className='mdl-navigation__link'
         to={"/sermons/" + this.props.congregation.bucketID}
-        key={this.props.congregation.key}
-        activeClassName="active" >
+        key={this.props.congregation.key} >
           {link}
         </NavLink>
     )
