@@ -86,7 +86,7 @@ const sermons = [
 ];
 
 it('filters by congregation when search term is specified and congregation is selected', () => {
-  const filteredSermons = SermonService.filter(sermons, 'Matt', {'bucketID' : 'rockford-archives'})
+  const filteredSermons = SermonService.filter(sermons, 'Matt', 'rockford-archives')
   expect(filteredSermons.length).toBe(1)
   expect(filteredSermons[0].minister).toBe('Rick Nevala')
   expect(filteredSermons[0].bibleText).toBe('Matt. 18: 15-20')
@@ -101,7 +101,7 @@ it('filters all sermons by search term if search term is specified and no congre
 });
 
 it('filters by congregation when search term is not specified and congregation is selected', () => {
-  const filteredSermons = SermonService.filter(sermons, null, {'bucketID' : 'rockford-archives'})
+  const filteredSermons = SermonService.filter(sermons, null, 'rockford-archives')
   expect(filteredSermons.length).toBe(5)
   for (var index in filteredSermons) {
     expect(filteredSermons[index].bucketID).toBe('rockford-archives')
