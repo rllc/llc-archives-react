@@ -40,7 +40,7 @@ class SermonService {
       // always sort by date in decsending order
       return filteredSermons.sort((a, b) => (
           new Date(b.date) - new Date(a.date)
-      ));
+      )).slice(0, 20);
     }
 
 }
