@@ -17,11 +17,16 @@ class CongregationLink extends React.Component {
   }
 
   isUserAdmin(congregation) {
-    // TODO: lookup user roles in firebase
-    const authorizedCongregations = ['rockford-archives', 'minneapolis-archives', 'phoenix-archives']
-    if (authorizedCongregations.includes(congregation.bucketID)) {
-      return true;
+    if (this.props.admin) {
+      //TODO: Get the congregation-admins portion working correctly.  I give up.
+
+      for (let item of this.props.admin) {
+        if (this.props.userID === item.key){
+          return true;
+        }
+      }
     }
+
     return false;
   }
 

@@ -3,6 +3,7 @@ import {Layout, Drawer, Navigation, Header, HeaderRow, Content} from 'react-mdl/
 import Textfield from 'react-mdl/lib/Textfield';
 import NavLink from './NavLink';
 import CongregationLink from './CongregationLink';
+import Button from 'react-mdl/lib/Button';
 
 class Congregations extends React.Component {
 
@@ -10,6 +11,21 @@ class Congregations extends React.Component {
     super(props);
     this.state = {searchTerm: ''};
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  login = () => {
+    var authHandler = function(error, user) {
+      if(error){
+         console.log(error);
+       }
+       else{
+         console.log('authentication success!!!');
+         console.log(user);
+       }
+      return;
+    }
+
+    this.props.base.authWithOAuthRedirect('google', authHandler);
   }
 
   formatHeadline() {
@@ -40,6 +56,14 @@ class Congregations extends React.Component {
   render() {
     var self = this;
 
+    let button = null;
+    if (self.state && self.props.displayName) {
+      button = <Button raised accent>{self.props.displayName}</Button>;
+    }
+    else {
+      button = <Button raised accent onClick={this.login}>Login</Button>;
+    }
+
     var children = React.Children.map(this.props.children, function (child) {
         return React.cloneElement(child, {
           base:self.props.base,
@@ -64,6 +88,7 @@ class Congregations extends React.Component {
       </Header>
 
       <Drawer title="Congregations">
+        {button}
         <Navigation>
 
         <NavLink
@@ -75,6 +100,8 @@ class Congregations extends React.Component {
           <CongregationLink
             key={congregation.key}
             sermons={self.props.sermons}
+            admin={self.props.admin}
+            userID={self.props.userID}
             congregation={congregation} />
         ))}
 

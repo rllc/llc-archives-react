@@ -43,6 +43,16 @@ class App extends Component {
           });
       }
     });
+    this.adminRef = base.fetch('administrators', {
+      context: this,
+      state: 'admin',
+      asArray: true,
+      then(data){
+        this.setState({
+          admin: data
+        });
+      }
+    });
   }
 
   componentDidMount(){
@@ -52,6 +62,7 @@ class App extends Component {
   componentWillUnMount() {
     base.removeBinding(this.congregationsRef);
     base.removeBinding(this.sermonsRef);
+    base.removeBinding(this.adminRef);
   }
 
   loginCheck() {
@@ -62,7 +73,7 @@ class App extends Component {
         self.setState({ userID : user.uid,
                       displayName : user.displayName,
                       email : user.email})
-        console.log(user);
+//        console.log(user);
       }
       else {
 //        console.log('Nobody logged in!');
@@ -82,6 +93,7 @@ class App extends Component {
           base:base,
           congregations:self.state.congregations,
           sermons:self.state.sermons,
+          admin:self.state.admin,
           userID:self.state.userID,
           email:self.state.email,
           displayName:self.state.displayName
