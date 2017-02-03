@@ -14,18 +14,7 @@ class Congregations extends React.Component {
   }
 
   login = () => {
-    var authHandler = function(error, user) {
-      if(error){
-         console.log(error);
-       }
-       else{
-         console.log('authentication success!!!');
-         console.log(user);
-       }
-      return;
-    }
-
-    this.props.base.authWithOAuthRedirect('google', authHandler);
+    this.props.base.authWithOAuthRedirect('google');
   }
 
   formatHeadline() {
