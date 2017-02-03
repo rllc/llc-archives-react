@@ -18,6 +18,8 @@ class App extends Component {
   }
 
   componentWillMount() {
+    this.loginCheck();
+
     this.congregationsRef = base.fetch('congregations', {
       context: this,
       state: 'congregations',
@@ -41,11 +43,44 @@ class App extends Component {
           });
       }
     });
+    this.adminRef = base.fetch('administrators', {
+      context: this,
+      state: 'admin',
+      asArray: true,
+      then(data){
+        this.setState({
+          admin: data
+        });
+      }
+    });
+  }
+
+  componentDidMount(){
+
   }
 
   componentWillUnMount() {
     base.removeBinding(this.congregationsRef);
     base.removeBinding(this.sermonsRef);
+    base.removeBinding(this.adminRef);
+  }
+
+  loginCheck() {
+    const self = this;
+    var authHandler = function(user) {
+      if(user) {
+        self.setState({ userID : user.uid,
+                      displayName : user.displayName,
+                      email : user.email})
+      }
+      else {
+        self.setState({userID : null})
+      }
+    }
+
+    if (! this.userID) {
+      base.onAuth(authHandler);
+    }
   }
 
   render() {
@@ -54,7 +89,11 @@ class App extends Component {
         return React.cloneElement(child, {
           base:base,
           congregations:self.state.congregations,
-          sermons:self.state.sermons
+          sermons:self.state.sermons,
+          admin:self.state.admin,
+          userID:self.state.userID,
+          email:self.state.email,
+          displayName:self.state.displayName
         })
       })
 
