@@ -69,14 +69,11 @@ class App extends Component {
     const self = this;
     var authHandler = function(user) {
       if(user) {
-//        console.log('You are logged in right now!');
         self.setState({ userID : user.uid,
                       displayName : user.displayName,
                       email : user.email})
-//        console.log(user);
       }
       else {
-//        console.log('Nobody logged in!');
         self.setState({userID : null})
       }
     }
