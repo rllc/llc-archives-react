@@ -28,30 +28,6 @@ class Sermons extends React.Component {
     this.props.base.authWithOAuthRedirect('google', authHandler);
   }
 
-  loginCheck() {
-    const self = this;
-    var authHandler = function(user) {
-      if(user) {
-        console.log('You are logged in right now!');
-        self.setState({userID : user.uid,
-                      displayName : user.displayName})
-        console.log(user);
-      }
-      else {
-        console.log('Nobody logged in!');
-        self.setState({userID : null})
-      }
-    }
-
-    if (! this.userID) {
-      this.props.base.onAuth(authHandler);
-    }
-  }
-
-  componentDidMount(){
-    this.loginCheck();
-  }
-
   formatHeadline() {
     var self = this;
     if (this.props.params.congregationId) {
@@ -82,8 +58,8 @@ class Sermons extends React.Component {
       })
 
     let button = null;
-    if (self.state && self.state.userID) {
-      button = <Button raised accent>{self.state.displayName}</Button>;
+    if (self.state && self.props.displayName) {
+      button = <Button raised accent>{self.props.displayName}</Button>;
     }
     else {
       button = <Button raised accent onClick={this.login}>Login</Button>;

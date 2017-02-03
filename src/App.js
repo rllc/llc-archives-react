@@ -18,6 +18,8 @@ class App extends Component {
   }
 
   componentWillMount() {
+    this.loginCheck();
+
     this.congregationsRef = base.fetch('congregations', {
       context: this,
       state: 'congregations',
@@ -43,9 +45,34 @@ class App extends Component {
     });
   }
 
+  componentDidMount(){
+
+  }
+
   componentWillUnMount() {
     base.removeBinding(this.congregationsRef);
     base.removeBinding(this.sermonsRef);
+  }
+
+  loginCheck() {
+    const self = this;
+    var authHandler = function(user) {
+      if(user) {
+//        console.log('You are logged in right now!');
+        self.setState({ userID : user.uid,
+                      displayName : user.displayName,
+                      email : user.email})
+        console.log(user);
+      }
+      else {
+//        console.log('Nobody logged in!');
+        self.setState({userID : null})
+      }
+    }
+
+    if (! this.userID) {
+      base.onAuth(authHandler);
+    }
   }
 
   render() {
@@ -54,7 +81,10 @@ class App extends Component {
         return React.cloneElement(child, {
           base:base,
           congregations:self.state.congregations,
-          sermons:self.state.sermons
+          sermons:self.state.sermons,
+          userID:self.state.userID,
+          email:self.state.email,
+          displayName:self.state.displayName
         })
       })
 
