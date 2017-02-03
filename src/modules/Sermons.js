@@ -29,6 +29,14 @@ class Sermons extends React.Component {
     this.setState({searchTerm: event.target.value});
   }
 
+  componentDidUpdate(prevProps, prevState){
+    var layout = document.querySelector('.mdl-layout');
+    var drawer = document.querySelector('.mdl-layout__drawer');
+    if (layout.classList.contains('is-small-screen') && drawer.classList.contains('is-visible')) {
+      layout.MaterialLayout.toggleDrawer();
+    }
+  } 
+
   render() {
     var self = this;
 
