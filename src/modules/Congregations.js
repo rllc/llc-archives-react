@@ -13,8 +13,15 @@ class Congregations extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  authHandler(error) {
+    if (error) {
+      console.error(error);
+    }
+    return;
+  }
+
   login = () => {
-    this.props.base.authWithOAuthRedirect('google');
+    this.props.base.authWithOAuthRedirect('google', this.authHandler);
   }
 
   formatHeadline() {
