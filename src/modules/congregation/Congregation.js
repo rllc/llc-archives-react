@@ -1,8 +1,8 @@
 import React from 'react'
 import {List, ListItem, ListItemContent} from 'react-mdl/lib/List'
 import AuthListItemAction from './AuthListItemAction.js'
-import SermonService from '../services/SermonService.js'
-import DateFormattingService from '../services/DateFormattingService.js'
+import SermonService from '../../services/SermonService.js'
+import DateFormattingService from '../../services/DateFormattingService.js'
 
 class Congregation extends React.Component {
 

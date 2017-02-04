@@ -1,6 +1,6 @@
 
 import React from 'react'
-import NavLink from './NavLink.js'
+import NavLink from '../common/NavLink.js'
 import Icon from 'react-mdl/lib/Icon'
 import {ListItemAction} from 'react-mdl/lib/List'
 

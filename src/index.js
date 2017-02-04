@@ -6,14 +6,9 @@ import 'react-mdl/extra/css/material.blue_grey-blue.min.css';
 import 'react-mdl/extra/material.js';
 import 'react-mdl/out/ReactMDL.min.js';
 
-import Sermons from './modules/Sermons.js';
-import Sermon from './modules/Sermon.js';
-import SermonEdit from './modules/SermonEdit.js';
-
-import Congregations from './modules/Congregations.js';
-import Congregation from './modules/Congregation.js';
-
-import Feedback from './modules/Feedback.js';
+import {Sermons, Sermon, SermonEdit } from './modules/sermon';
+import {Congregations, Congregation} from './modules/congregation'
+import Feedback from './modules/feedback';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 // Needed for onTouchTap

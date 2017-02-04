@@ -1,7 +1,7 @@
 import React from 'react'
 import {Layout, Drawer, Navigation, Header, HeaderRow, Content} from 'react-mdl/lib/Layout';
 import Textfield from 'react-mdl/lib/Textfield';
-import NavLink from './NavLink';
+import NavLink from '../common/NavLink';
 import CongregationLink from './CongregationLink';
 import Button from 'react-mdl/lib/Button';
 

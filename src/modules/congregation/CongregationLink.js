@@ -1,5 +1,5 @@
 import React from 'react'
-import NavLink from './NavLink';
+import NavLink from '../common/NavLink';
 import Badge from 'react-mdl/lib/Badge'
 
 class CongregationLink extends React.Component {
