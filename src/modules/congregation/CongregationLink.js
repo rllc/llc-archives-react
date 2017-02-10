@@ -1,6 +1,7 @@
 import React from 'react'
 import NavLink from '../common/NavLink';
 import Badge from 'react-mdl/lib/Badge'
+import AdminVerifyService from '../../services/AdminVerifyService.js'
 
 class CongregationLink extends React.Component {
 
@@ -16,25 +17,13 @@ class CongregationLink extends React.Component {
     )).length
   }
 
-  isUserAdmin(congregation) {
-    if (this.props.admin) {
-      //TODO: Get the congregation-admins portion working correctly.  I give up.
-
-      for (let item of this.props.admin) {
-        if (this.props.userID === item.key){
-          return true;
-        }
-      }
-    }
-
-    return false;
-  }
-
   render() {
     const linkText = this.props.congregation.displayName + " (" + this.publishedSermonCount(this.props.congregation) + ")";
     const unpublishedSermonCount = this.unpublishedSermonCount(this.props.congregation);
     var link = linkText;
-    if (this.isUserAdmin(this.props.congregation) && unpublishedSermonCount) {
+
+    if (AdminVerifyService.isUserAdmin(this.props.admin, this.props.congregation.bucketID, this.props.userID)
+          && unpublishedSermonCount) {
         link = <Badge text={unpublishedSermonCount}>{linkText}</Badge>
     }
 

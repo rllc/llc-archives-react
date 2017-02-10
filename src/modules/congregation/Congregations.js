@@ -65,7 +65,9 @@ class Congregations extends React.Component {
           base:self.props.base,
           congregations:self.props.congregations,
           sermons:self.props.sermons,
-          searchTerm:self.state.searchTerm
+          searchTerm:self.state.searchTerm,
+          userID:self.props.userID,
+          admin:self.props.admin
         })
       })
 

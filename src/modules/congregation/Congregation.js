@@ -25,7 +25,9 @@ class Congregation extends React.Component {
                 subtitle={sermon.bibleText + ' ' + sermon.comments}>
                 {sermon.minister} : {DateFormattingService.formatDate(sermon.date)}
               </ListItemContent>
-              <AuthListItemAction sermon={sermon}/>
+              <AuthListItemAction sermon={sermon}
+                admin={this.props.admin}
+                userID={this.props.userID}/>
             </ListItem>
           ))
         }
