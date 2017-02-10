@@ -56,13 +56,24 @@ class SermonEdit extends React.Component {
     let self = this;
 
     if (self.state.sermon) {
-      return (
+      var fileName = self.state.sermon.fileUrl.split(self.state.sermon.bucketID + '/')[1];
 
+      return (
         <Layout fixedHeader>
             <Header title={self.state.sermon.bucketID} >
             </Header>
             <Content>
                 <List>
+                  <ListItem key={self.state.sermon.bucketID}>
+                    <ListItemContent>
+                      Bucket ID : {self.state.sermon.bucketID}
+                    </ListItemContent>
+                  </ListItem>
+                  <ListItem key={self.state.sermon.fileUrl}>
+                    <ListItemContent>
+                      File Path : {fileName}
+                    </ListItemContent>
+                  </ListItem>
                       <ListItem key={self.state.sermon.bibleText}>
                         <ListItemContent>
                           <Textfield
