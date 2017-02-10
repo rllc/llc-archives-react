@@ -1,6 +1,12 @@
 
 class SermonService {
 
+  static findById(sermons, id) {
+    return sermons.find((sermon) => (
+      sermon.key === id
+    ))
+  }
+
     static getUnpublishedSermons(sermons, selectedCongregationBucketId) {
       if (selectedCongregationBucketId === 'all') {
         selectedCongregationBucketId = null;

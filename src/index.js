@@ -6,7 +6,7 @@ import 'react-mdl/extra/css/material.blue_grey-blue.min.css';
 import 'react-mdl/extra/material.js';
 import 'react-mdl/out/ReactMDL.min.js';
 
-import {Sermons, Sermon, SermonEdit } from './modules/sermon';
+import {SermonEdit } from './modules/sermon';
 import {Congregations, Congregation} from './modules/congregation'
 import Feedback from './modules/feedback';
 
@@ -27,8 +27,6 @@ ReactDOM.render(
             <Route path="/congregations/:congregationId" component={Congregation}/>
             <Route path="/congregations/:congregationId/:tabId" component={Congregation}/>
           </Route>
-          <Route path="/sermons" component={Sermons} />
-          <Route path="/sermons/:sermonId" component={Sermon}/>
           <Route path="/sermons/:sermonId/edit" component={SermonEdit}/>
           <Route path="/feedback" component={Feedback}/>
         </Route>
