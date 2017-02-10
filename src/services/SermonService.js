@@ -1,6 +1,24 @@
 
 class SermonService {
 
+    static getUnpublishedSermons(sermons, selectedCongregationBucketId) {
+      if (selectedCongregationBucketId === 'all') {
+        selectedCongregationBucketId = null;
+      }
+      var filteredSermons = sermons.filter((sermon) => (sermon.published === false))
+
+      if (selectedCongregationBucketId) {
+        filteredSermons = filteredSermons.filter((sermon) => (
+          (sermon.bucketID === selectedCongregationBucketId)
+        ))
+      }
+
+      // always sort by date in decsending order
+      return filteredSermons.sort((a, b) => (
+          new Date(b.date) - new Date(a.date)
+      )).slice(0, 20);
+    }
+
     static filter(sermons, searchTerm, selectedCongregationBucketId) {
       if (selectedCongregationBucketId === 'all') {
         selectedCongregationBucketId = null;

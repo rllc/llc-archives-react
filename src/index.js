@@ -25,6 +25,7 @@ ReactDOM.render(
           <IndexRedirect to="/congregations/all" />
           <Route path="/congregations" component={Congregations}>
             <Route path="/congregations/:congregationId" component={Congregation}/>
+            <Route path="/congregations/:congregationId/:tabId" component={Congregation}/>
           </Route>
           <Route path="/sermons" component={Sermons} />
           <Route path="/sermons/:sermonId" component={Sermon}/>

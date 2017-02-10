@@ -11,10 +11,20 @@ class Congregation extends React.Component {
   }
 
   render() {
-    var sermons = SermonService.filter(
-      this.props.sermons,
-      this.props.searchTerm,
-      this.props.params.congregationId);
+    var sermons = [];
+    if (this.props.params.tabId === 'unpublished') {
+      sermons = SermonService.getUnpublishedSermons(
+        this.props.sermons,
+        this.props.params.congregationId
+      );
+    }
+    else {
+      sermons = SermonService.filter(
+        this.props.sermons,
+        this.props.searchTerm,
+        this.props.params.congregationId);
+    }
+
     return (
       <List>
         {
