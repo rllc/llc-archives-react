@@ -64,7 +64,7 @@ class SermonEdit extends React.Component {
             </Header>
             <Content>
                 <List>
-                  <ListItem key={self.state.sermon.bucketID}>
+                  <ListItem key='bucketID'>
                     <ListItemContent>
                       Bucket ID : {self.state.sermon.bucketID}
                     </ListItemContent>
@@ -74,7 +74,7 @@ class SermonEdit extends React.Component {
                       File Path : {fileName}
                     </ListItemContent>
                   </ListItem>
-                      <ListItem key={self.state.sermon.bibleText}>
+                      <ListItem key='bibleText'>
                         <ListItemContent>
                           <Textfield
                               onBlur={this.onBlur.bind(this, 'bibleText')}
@@ -83,7 +83,7 @@ class SermonEdit extends React.Component {
                               defaultValue={self.state.sermon.bibleText} />
                         </ListItemContent>
                       </ListItem>
-                      <ListItem key={self.state.sermon.comments}>
+                      <ListItem key='comments'>
                         <ListItemContent>
                           <Textfield
                               onBlur={this.onBlur.bind(this, 'comments')}
@@ -93,7 +93,7 @@ class SermonEdit extends React.Component {
                           />
                         </ListItemContent>
                       </ListItem>
-                      <ListItem key={self.state.sermon.date}>
+                      <ListItem key='date'>
                         <ListItemContent>
                           <Textfield
                               onBlur={this.onBlur.bind(this, 'date')}
@@ -103,7 +103,7 @@ class SermonEdit extends React.Component {
                           />
                         </ListItemContent>
                       </ListItem>
-                      <ListItem key={self.state.sermon.minister}>
+                      <ListItem key='minister'>
                         <ListItemContent>
                           <Textfield
                               onBlur={this.onBlur.bind(this, 'minister')}
@@ -112,7 +112,7 @@ class SermonEdit extends React.Component {
                               defaultValue={self.state.sermon.minister} />
                         </ListItemContent>
                       </ListItem>
-                      <ListItem key={self.state.sermon.published}>
+                      <ListItem key='published'>
                         <ListItemContent>
                         <Switch ripple
                           defaultChecked={self.state.sermon.published}
