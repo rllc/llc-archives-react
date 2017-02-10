@@ -3,21 +3,13 @@ import React from 'react'
 import NavLink from '../common/NavLink.js'
 import Icon from 'react-mdl/lib/Icon'
 import {ListItemAction} from 'react-mdl/lib/List'
+import AdminVerifyService from '../../services/AdminVerifyService.js'
 
 class AuthListItemAction extends React.Component {
 
-  isUserAdmin(sermon) {
-    // TODO: lookup user roles in firebase
-    const authorizedCongregations = ['rockford-archives', 'minneapolis-archives', 'phoenix-archives']
-    if (authorizedCongregations.includes(sermon.bucketID)) {
-      return true;
-    }
-    return false;
-  }
-
   render() {
     var self = this;
-    if (this.isUserAdmin(this.props.sermon)) {
+    if (AdminVerifyService.isUserAdmin(self.props.admin, self.props.sermon.bucketID, self.props.userID)) {
       return (
         <ListItemAction>
           <NavLink
