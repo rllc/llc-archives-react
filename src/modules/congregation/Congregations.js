@@ -4,6 +4,7 @@ import Textfield from 'react-mdl/lib/Textfield';
 import NavLink from '../common/NavLink';
 import CongregationLink from './CongregationLink';
 import Button from 'react-mdl/lib/Button';
+import AdminVerifyService from '../../services/AdminVerifyService.js'
 
 class Congregations extends React.Component {
 
@@ -71,6 +72,20 @@ class Congregations extends React.Component {
         })
       })
 
+    var tabs = '';
+    if (self.props.params.congregationId &&
+          AdminVerifyService.isUserAdmin(self.props.admin, self.props.params.congregationId, self.props.userID)) {
+      var publishedLink = '/congregations/' + self.props.params.congregationId + '/published';
+      var unpublishedLink = '/congregations/' + self.props.params.congregationId + '/unpublished';
+      tabs =
+            <HeaderRow><Navigation>
+                <NavLink to={publishedLink}>Published
+                      </NavLink>
+                <NavLink to={unpublishedLink}>Not Published
+                      </NavLink>
+              </Navigation></HeaderRow>
+    }
+
     return (
       <Layout fixedHeader fixedDrawer>
       <Header style={{color: 'white'}}>
@@ -83,6 +98,7 @@ class Congregations extends React.Component {
               expandableIcon="search"
           />
         </HeaderRow>
+        {tabs}
       </Header>
 
       <Drawer title="Congregations">
