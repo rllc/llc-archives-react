@@ -49,7 +49,7 @@ class SermonEdit extends React.Component {
   }
 
   goBack() {
-    this.props.router.push('/congregations/' + this.state.sermon.bucketID);
+    this.props.router.goBack();
   }
 
   render() {
