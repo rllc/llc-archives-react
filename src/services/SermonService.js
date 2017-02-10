@@ -1,6 +1,12 @@
 
 class SermonService {
 
+  static findById(sermons, id) {
+    return sermons.find((sermon) => (
+      sermon.key === id
+    ))
+  }
+
     static filter(sermons, searchTerm, selectedCongregationBucketId) {
       if (selectedCongregationBucketId === 'all') {
         selectedCongregationBucketId = null;
