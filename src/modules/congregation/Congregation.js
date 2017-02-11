@@ -10,7 +10,19 @@ class Congregation extends React.Component {
     window.location.href = sermon.fileUrl;
   }
 
+  formatTitle(sermon) {
+    if (sermon.minister || sermon.date) {
+      return sermon.minister  + ' : ' + DateFormattingService.formatDate(sermon.date);
+    }
+    return sermon.fileUrl;
+  }
+
+  formatSubtitle(sermon) {
+    return sermon.bibleText + ' ' + sermon.comments;
+  }
+
   render() {
+    var self = this;
     var sermons = [];
     if (this.props.params.tabId === 'unpublished') {
       sermons = SermonService.getUnpublishedSermons(
@@ -32,8 +44,8 @@ class Congregation extends React.Component {
             <ListItem key={sermon.key} twoLine>
               <ListItemContent
                 onClick={this.playSermon.bind(this, sermon)}
-                subtitle={sermon.bibleText + ' ' + sermon.comments}>
-                {sermon.minister} : {DateFormattingService.formatDate(sermon.date)}
+                subtitle={self.formatSubtitle(sermon)}>
+                {self.formatTitle(sermon)}
               </ListItemContent>
               <AuthListItemAction sermon={sermon}
                 admin={this.props.admin}
