@@ -18,9 +18,17 @@ injectTapEventPlugin();
 import App from './App';
 import './index.css';
 
+var ReactGA = require('react-ga');
+ReactGA.initialize('UA-92011312-1');
+
+function logPageView() {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+}
+
 ReactDOM.render(
   (
-      <Router history={hashHistory}>
+      <Router history={hashHistory} onUpdate={logPageView}>
         <Route path="/" component={App}>
           <IndexRedirect to="/congregations/all" />
           <Route path="/congregations" component={Congregations}>
