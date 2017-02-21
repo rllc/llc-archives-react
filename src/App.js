@@ -20,38 +20,25 @@ class App extends Component {
   componentWillMount() {
     this.loginCheck();
 
-    this.congregationsRef = base.fetch('congregations', {
+    this.congregationsRef = base.bindToState('congregations', {
       context: this,
       state: 'congregations',
-      asArray: true,
-      then(data){
-        this.setState({
-          congregations: data
-        });
-      }
+      asArray: true
     });
-    this.sermonsRef = base.fetch('sermons', {
+
+    this.sermonsRef = base.bindToState('sermons', {
       context: this,
       state: 'sermons',
       asArray: true,
       queries: {
         orderByChild: 'date'
-      },
-      then(data){
-          this.setState({
-            sermons: data
-          });
       }
     });
-    this.adminRef = base.fetch('administrators', {
+
+    this.adminRef = base.bindToState('administrators', {
       context: this,
       state: 'admin',
-      asArray: true,
-      then(data){
-        this.setState({
-          admin: data
-        });
-      }
+      asArray: true
     });
   }
 
