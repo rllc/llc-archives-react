@@ -3,11 +3,16 @@ import {List, ListItem, ListItemContent} from 'react-mdl/lib/List'
 import AuthListItemAction from './AuthListItemAction.js'
 import SermonService from '../../services/SermonService.js'
 import DateFormattingService from '../../services/DateFormattingService.js'
+var ReactGA = require('react-ga');
 
 class Congregation extends React.Component {
 
   playSermon(sermon) {
-    window.location.href = sermon.fileUrl;
+    ReactGA.outboundLink({
+      label: sermon.fileUrl
+    }, function () {
+      window.location.href = sermon.fileUrl;
+    });
   }
 
   formatTitle(sermon) {
