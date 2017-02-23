@@ -6,6 +6,7 @@ import ProgressBar from 'react-mdl/lib/ProgressBar'
 import Switch from 'react-mdl/lib/Switch'
 import {List, ListItem, ListItemContent, ListItemAction} from 'react-mdl/lib/List'
 import {Layout, Header, Content} from 'react-mdl/lib/Layout';
+var ReactGA = require('react-ga');
 
 class SermonEdit extends React.Component {
 
@@ -36,6 +37,12 @@ class SermonEdit extends React.Component {
   }
 
   persistSermon() {
+    ReactGA.event({
+      category: 'Editing',
+      action: 'Updating Sermon',
+      label: this.props.userID
+    });
+
     let self = this;
     self.props.base.update('sermons/' + self.state.sermon.key, {
       data: self.state.sermon
