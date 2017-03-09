@@ -6,3 +6,36 @@ body {
 a.active {
   background-color: #d0d0d0;
 }
+
+.dateLabel {
+  color: rgb(96,125,139);
+  font-size: 12px;
+}
+.SingleDatePickerInput {
+  border: 0px;
+}
+.SingleDatePicker__picker {
+  position: static;
+}
+.DayPicker__week-header {
+  top: 50px;
+}
+.SingleDatePicker {
+  display: block;
+}
+
+.SingleDatePicker .SingleDatePickerInput .DateInput {
+  color: #9a9a9a;
+  font-size: 14px;
+  width: auto;
+}
+
+.DateInput--with-caret::before, .DateInput--with-caret::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}

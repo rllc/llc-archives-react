@@ -6,6 +6,10 @@ import ProgressBar from 'react-mdl/lib/ProgressBar'
 import Switch from 'react-mdl/lib/Switch'
 import {List, ListItem, ListItemContent, ListItemAction} from 'react-mdl/lib/List'
 import {Layout, Header, Content} from 'react-mdl/lib/Layout';
+import moment from 'moment';
+import { SingleDatePicker } from 'react-dates';
+import 'react-dates/lib/css/_datepicker.css';
+
 var ReactGA = require('react-ga');
 
 class SermonEdit extends React.Component {
@@ -13,7 +17,8 @@ class SermonEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sermon: null
+      sermon: null,
+      dateFocus: false
     };
   }
 
@@ -31,6 +36,14 @@ class SermonEdit extends React.Component {
     else {
       sermon[fieldName] = event.target.value;
     }
+    this.setState({
+      sermon: sermon
+    });
+  }
+
+  onDateChange(date) {
+    var sermon = this.state.sermon;
+    sermon.date = date ? date.format() : '';
     this.setState({
       sermon: sermon
     });
@@ -102,11 +115,15 @@ class SermonEdit extends React.Component {
                       </ListItem>
                       <ListItem key='date'>
                         <ListItemContent>
-                          <Textfield
-                              onBlur={this.onBlur.bind(this, 'date')}
-                              label="Date"
-                              floatingLabel
-                              defaultValue={self.state.sermon.date}
+                        <label className="dateLabel" htmlFor="date">Date</label>
+                        <SingleDatePicker
+                            id="date"
+                            numberOfMonths={1}
+                            isOutsideRange={(day) => false}
+                            date={moment(self.state.sermon.date)}
+                            focused={self.state.dateFocus}
+                            onDateChange={this.onDateChange.bind(this)}
+                            onFocusChange={({ focused }) => { self.setState({ dateFocus: focused }); }}
                           />
                         </ListItemContent>
                       </ListItem>
