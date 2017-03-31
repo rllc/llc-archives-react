@@ -54,7 +54,7 @@ class Congregation extends React.Component {
               </ListItemContent>
               <AuthListItemAction sermon={sermon}
                 admin={this.props.admin}
-                userID={this.props.userID}/>
+                user={this.props.user}/>
             </ListItem>
           ))
         }

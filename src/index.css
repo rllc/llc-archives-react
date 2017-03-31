@@ -39,3 +39,51 @@ a.active {
   vertical-align: baseline;
   background: transparent;
 }
+
+.social-login-text {
+  padding: 5px;
+}
+
+.social-login-icon {
+  height: 29px;
+  width: 29px;
+}
+
+.auth-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+}
+
+.auth-drawer-header {
+  box-sizing: border-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-align-items: baseline;
+  -webkit-box-align: stretch;
+  align-items: stretch;
+  align-self: stretch;
+  padding: 16px;
+  height: 115px;
+}
+
+.auth-avatar-dropdown {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}

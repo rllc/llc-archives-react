@@ -56,16 +56,22 @@ class App extends Component {
     const self = this;
     var authHandler = function(user) {
       if(user) {
-        self.setState({ userID : user.uid,
-                      displayName : user.displayName,
-                      email : user.email})
+        self.setState({
+          user : {
+            id : user.uid,
+            displayName : user.displayName,
+            email : user.email,
+            photoURL : user.photoURL,
+            provider : user.providerData[0].providerId
+          }
+        })
       }
       else {
-        self.setState({userID : null})
+        self.setState({user : null})
       }
     }
 
-    if (! this.userID) {
+    if (! this.user) {
       base.onAuth(authHandler);
     }
   }
@@ -78,9 +84,7 @@ class App extends Component {
           congregations:self.state.congregations,
           sermons:self.state.sermons,
           admin:self.state.admin,
-          userID:self.state.userID,
-          email:self.state.email,
-          displayName:self.state.displayName
+          user: self.state.user
         })
       })
 

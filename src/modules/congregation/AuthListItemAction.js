@@ -9,7 +9,7 @@ class AuthListItemAction extends React.Component {
 
   render() {
     var self = this;
-    if (AdminVerifyService.isUserAdmin(self.props.admin, self.props.sermon.bucketID, self.props.userID)) {
+    if (AdminVerifyService.isUserAdmin(self.props.admin, self.props.sermon.bucketID, self.props.user)) {
       return (
         <ListItemAction>
           <NavLink

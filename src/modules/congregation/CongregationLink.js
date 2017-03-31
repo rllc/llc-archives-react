@@ -22,7 +22,7 @@ class CongregationLink extends React.Component {
     const unpublishedSermonCount = this.unpublishedSermonCount(this.props.congregation);
     var link = linkText;
 
-    if (AdminVerifyService.isUserAdmin(this.props.admin, this.props.congregation.bucketID, this.props.userID)
+    if (AdminVerifyService.isUserAdmin(this.props.admin, this.props.congregation.bucketID, this.props.user)
           && unpublishedSermonCount) {
         link = <Badge text={unpublishedSermonCount}>{linkText}</Badge>
     }

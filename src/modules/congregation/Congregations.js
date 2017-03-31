@@ -3,7 +3,7 @@ import {Layout, Drawer, Navigation, Header, HeaderRow, Content} from 'react-mdl/
 import Textfield from 'react-mdl/lib/Textfield';
 import NavLink from '../common/NavLink';
 import CongregationLink from './CongregationLink';
-import Button from 'react-mdl/lib/Button';
+import UserAuth from './UserAuth';
 import AdminVerifyService from '../../services/AdminVerifyService.js'
 
 class Congregations extends React.Component {
@@ -19,10 +19,6 @@ class Congregations extends React.Component {
       console.error(error);
     }
     return;
-  }
-
-  login = () => {
-    this.props.base.authWithOAuthRedirect('google', this.authHandler);
   }
 
   formatHeadline() {
@@ -52,29 +48,20 @@ class Congregations extends React.Component {
 
   render() {
     var self = this;
-
-    let button = null;
-    if (self.state && self.props.displayName) {
-      button = <Button raised accent>{self.props.displayName}</Button>;
-    }
-    else {
-      button = <Button raised accent onClick={this.login}>Login</Button>;
-    }
-
     var children = React.Children.map(this.props.children, function (child) {
         return React.cloneElement(child, {
           base:self.props.base,
           congregations:self.props.congregations,
           sermons:self.props.sermons,
           searchTerm:self.state.searchTerm,
-          userID:self.props.userID,
+          user:self.props.user,
           admin:self.props.admin
         })
       })
 
     var tabs = '';
     if (self.props.params.congregationId &&
-          AdminVerifyService.isUserAdmin(self.props.admin, self.props.params.congregationId, self.props.userID)) {
+          AdminVerifyService.isUserAdmin(self.props.admin, self.props.params.congregationId, self.props.user)) {
       var publishedLink = '/congregations/' + self.props.params.congregationId + '/published';
       var unpublishedLink = '/congregations/' + self.props.params.congregationId + '/unpublished';
       tabs =
@@ -101,10 +88,10 @@ class Congregations extends React.Component {
         {tabs}
       </Header>
 
-      <Drawer title="Congregations">
-        {button}
+      <Drawer>
+        <UserAuth user={self.props.user} base={self.props.base} />
+        <span className="mdl-layout-title">Congregations</span>
         <Navigation>
-
         <NavLink
           to={"/congregations/all"}
           key={'congregations'}>
@@ -115,17 +102,14 @@ class Congregations extends React.Component {
             key={congregation.key}
             sermons={self.props.sermons}
             admin={self.props.admin}
-            userID={self.props.userID}
+            user={self.props.user}
             congregation={congregation} />
         ))}
-
         </Navigation>
       </Drawer>
-
     <Content>
       {children}
     </Content>
-
     </Layout>
     )
   }

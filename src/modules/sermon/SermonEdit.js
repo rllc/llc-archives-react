@@ -53,7 +53,7 @@ class SermonEdit extends React.Component {
     ReactGA.event({
       category: 'Editing',
       action: 'Updating Sermon',
-      label: this.props.userID
+      label: this.props.user.id
     });
 
     let self = this;

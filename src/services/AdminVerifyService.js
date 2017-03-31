@@ -1,9 +1,9 @@
 class AdminVerifyService {
-  static isUserAdmin(adminObject, bucketID, userID) {
+  static isUserAdmin(adminObject, bucketID, user) {
     if (adminObject) {
       for (let item of adminObject) {
         //Check if user in base administrators folder
-        if (userID === item.key){
+        if (user && user.id === item.key){
           return true;
         }
 
@@ -11,7 +11,7 @@ class AdminVerifyService {
         if (item.key === bucketID){
           var congregationAdmins = Object.keys(item);
           for (let adminID of congregationAdmins) {
-            if (adminID === userID) {
+            if (user && user.id === adminID) {
               return true;
             }
           }
