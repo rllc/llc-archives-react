@@ -8,8 +8,8 @@ class UserAuth extends React.Component {
   render() {
     var self = this;
     return (
-      <Header style={{color: 'white'}}>
-        <HeaderRow className="auth-drawer-header" >
+
+        <div className="auth-drawer-header" >
             <img alt="user avatar" src={self.props.user ? self.props.user.photoURL : "images/anon.png"} className="auth-avatar"/>
             <div className="auth-avatar-dropdown">
               <span>{self.props.user ? self.props.user.displayName : "Signed out"}</span>
@@ -20,8 +20,8 @@ class UserAuth extends React.Component {
               </button>
               <UserAuthDropdown htmlFor="accbtn" base={self.props.base} user={self.props.user} />
             </div>
-        </HeaderRow>
-      </Header>
+        </div>
+      
     )
   }
 }
