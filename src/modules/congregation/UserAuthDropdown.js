@@ -16,9 +16,6 @@ class UserAuthDropdown extends React.Component {
       if (this.props.user.provider.includes('google')) {
         return 'images/google-icon.png';
       }
-      else if (this.props.user.provider.includes('twitter')) {
-        return 'images/twitter-icon.png';
-      }
       else if (this.props.user.provider.includes('facebook')) {
         return 'images/facebook-icon.png';
       }
@@ -46,12 +43,6 @@ class UserAuthDropdown extends React.Component {
               <img alt="google social login" src="images/google-icon.png" className="social-login-icon" />
               <span className="social-login-text">
                 Sign in with Google
-              </span>
-            </li>
-            <li className="mdl-menu__item" onClick={this.login.bind(this, 'twitter')}>
-              <img alt="twitter social login" src="images/twitter-icon.png" className="social-login-icon" />
-              <span className="social-login-text">
-                Sign in with Twitter
               </span>
             </li>
             <li className="mdl-menu__item" onClick={this.login.bind(this, 'facebook')}>
