@@ -23,6 +23,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build -x -r https://${GH_TOKEN}@github.com/rllc/rllc.github.io.git"
+    "deploy": "gh-pages -d build -b master -x -r https://${GH_TOKEN}@github.com/rllc/rllc.github.io.git"
   }
 }
