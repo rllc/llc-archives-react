@@ -20,6 +20,14 @@ class App extends Component {
   componentWillMount() {
     this.loginCheck();
 
+    //filter for last 3 years
+    var currentTime = new Date();
+    var year = currentTime.getFullYear() - 3;
+    var month = currentTime.getMonth();
+    var day = currentTime.getDate();
+
+    var dateString = new Date(year, month, day).toISOString();
+
     this.congregationsRef = base.bindToState('congregations', {
       context: this,
       state: 'congregations',
@@ -31,7 +39,8 @@ class App extends Component {
       state: 'sermons',
       asArray: true,
       queries: {
-        orderByChild: 'date'
+        orderByChild: 'date',
+        startAt: dateString
       }
     });
 
