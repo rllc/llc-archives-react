@@ -1,6 +1,5 @@
 
 import React from 'react'
-import {Header, HeaderRow} from 'react-mdl/lib/Layout';
 import UserAuthDropdown from './UserAuthDropdown'
 
 class UserAuth extends React.Component {
@@ -21,7 +20,7 @@ class UserAuth extends React.Component {
               <UserAuthDropdown htmlFor="accbtn" base={self.props.base} user={self.props.user} />
             </div>
         </div>
-      
+
     )
   }
 }
