@@ -28,7 +28,7 @@ class SermonEdit extends React.Component {
     });
   }
 
-  onBlur(fieldName, event) {
+  updateField(fieldName, event) {
     var sermon = this.state.sermon;
     if (event.target.type === 'checkbox') {
       sermon[fieldName] = event.target.checked;
@@ -97,7 +97,7 @@ class SermonEdit extends React.Component {
                       <ListItem key='bibleText'>
                         <ListItemContent>
                           <Textfield
-                              onBlur={this.onBlur.bind(this, 'bibleText')}
+                              onBlur={this.updateField.bind(this, 'bibleText')}
                               label="Bible Text"
                               floatingLabel
                               defaultValue={self.state.sermon.bibleText} />
@@ -106,7 +106,7 @@ class SermonEdit extends React.Component {
                       <ListItem key='comments'>
                         <ListItemContent>
                           <Textfield
-                              onBlur={this.onBlur.bind(this, 'comments')}
+                              onBlur={this.updateField.bind(this, 'comments')}
                               label="Event"
                               floatingLabel
                               defaultValue={self.state.sermon.comments}
@@ -130,7 +130,7 @@ class SermonEdit extends React.Component {
                       <ListItem key='minister'>
                         <ListItemContent>
                           <Textfield
-                              onBlur={this.onBlur.bind(this, 'minister')}
+                              onBlur={this.updateField.bind(this, 'minister')}
                               label="Minister"
                               floatingLabel
                               defaultValue={self.state.sermon.minister} />
@@ -140,7 +140,7 @@ class SermonEdit extends React.Component {
                         <ListItemContent>
                         <Switch ripple
                           defaultChecked={self.state.sermon.published}
-                          onBlur={this.onBlur.bind(this, 'published')}>Published</Switch>
+                          onClick={this.updateField.bind(this, 'published')}>Published</Switch>
                         </ListItemContent>
                       </ListItem>
                       <ListItem key="submit_button">
