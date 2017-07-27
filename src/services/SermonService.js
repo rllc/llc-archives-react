@@ -2,9 +2,7 @@
 class SermonService {
 
   static findById(sermons, id) {
-    return sermons.filter((sermon) => (
-      sermon.key !== id
-    ))
+    return sermons[sermons.map(function(x) {return x.key; }).indexOf(id)];
   }
 
     static getUnpublishedSermons(sermons, selectedCongregationBucketId) {
