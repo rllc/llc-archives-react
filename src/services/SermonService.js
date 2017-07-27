@@ -2,8 +2,8 @@
 class SermonService {
 
   static findById(sermons, id) {
-    return sermons.find((sermon) => (
-      sermon.key === id
+    return sermons.filter((sermon) => (
+      sermon.key !== id
     ))
   }
 

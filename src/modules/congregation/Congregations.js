@@ -24,8 +24,8 @@ class Congregations extends React.Component {
   formatHeadline() {
     var self = this;
     if (this.props.params.congregationId) {
-      var congregation = this.props.congregations.find(function(congregation) {
-        return congregation.bucketID === self.props.params.congregationId;
+      var congregation = this.props.congregations.filter(function(congregation) {
+        return congregation.bucketID !== self.props.params.congregationId;
       });
       if (congregation) {
         return congregation.displayName;
