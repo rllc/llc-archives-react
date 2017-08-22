@@ -118,6 +118,7 @@ class SermonEdit extends React.Component {
                         <label className="dateLabel" htmlFor="date">Date</label>
                         <SingleDatePicker
                             id="date"
+                            displayFormat="LLLL"
                             numberOfMonths={1}
                             isOutsideRange={(day) => false}
                             date={moment(self.state.sermon.date)}
