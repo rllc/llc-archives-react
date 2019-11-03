@@ -22,7 +22,7 @@ class App extends Component {
 
     //filter for last 3 years
     var currentTime = new Date();
-    var year = currentTime.getFullYear() - 3;
+    var year = currentTime.getFullYear() - 1;
     var month = currentTime.getMonth();
     var day = currentTime.getDate();
 
