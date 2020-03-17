@@ -20,9 +20,9 @@ class App extends Component {
   componentWillMount() {
     this.loginCheck();
 
-    //filter for last 4 years
+    //filter for last 1 years
     var currentTime = new Date();
-    var year = currentTime.getFullYear() - 4;
+    var year = currentTime.getFullYear() - 1;
     var month = currentTime.getMonth();
     var day = currentTime.getDate();
 
