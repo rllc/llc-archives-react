@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import Rebase from 're-base';
+import React, { Component } from "react";
+import Rebase from "re-base";
+import LoadingIndicator from "./modules/common/LoadingIndicator";
 
 var base = Rebase.createClass({
   apiKey: "AIzaSyD-uM9lWp5_MTYBauHlsbzJUhUkNE53zh4",
@@ -9,50 +10,74 @@ var base = Rebase.createClass({
 });
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       congregations: [],
-      sermons: []
-    }
+      sermons: [],
+      loading: true
+    };
+
+    //filter for last 3 months
+    var currentTime = new Date();
+    var year = currentTime.getFullYear();
+    var month = currentTime.getMonth();
+    var day = currentTime.getDay();
+    var prev3Months = month > 3 ? 1 : month - 3;
+
+    var endDateString = new Date(year, month + 1, day).toISOString();
+    var startDateString = new Date(year, prev3Months+1, 1).toISOString();
+
+    this.sermonsRef = base.bindToState("sermons", {
+      context: this,
+      state: "sermons",
+      asArray: true,
+      queries: {
+        orderByChild: "date",
+        startAt: startDateString,
+        endAt: endDateString
+      },
+      then: () => {
+        this.setState({ loading: false });
+      }
+    });
+
+    this.congregationsRef = base.bindToState("congregations", {
+      context: this,
+      state: "congregations",
+      asArray: true
+    });
+
+    this.adminRef = base.bindToState("administrators", {
+      context: this,
+      state: "admin",
+      asArray: true
+    });
   }
 
   componentWillMount() {
     this.loginCheck();
-
-    //filter for last 1 years
-    var currentTime = new Date();
-    var year = currentTime.getFullYear() - 1;
-    var month = currentTime.getMonth();
-    var day = currentTime.getDate();
-
-    var dateString = new Date(year, month, day).toISOString();
-
-    this.congregationsRef = base.bindToState('congregations', {
-      context: this,
-      state: 'congregations',
-      asArray: true
-    });
-
-    this.sermonsRef = base.bindToState('sermons', {
-      context: this,
-      state: 'sermons',
-      asArray: true,
-      queries: {
-        orderByChild: 'date',
-        startAt: dateString
-      }
-    });
-
-    this.adminRef = base.bindToState('administrators', {
-      context: this,
-      state: 'admin',
-      asArray: true
-    });
   }
 
-  componentDidMount(){
+  componentDidMount() {
+    //get the rest of the data
+    var currentTime = new Date();
+    var year = currentTime.getFullYear();
+    var month = currentTime.getMonth();
+    var day = currentTime.getDay();
 
+    var endDateString = new Date(year, month + 1, day).toISOString();
+    var startDateString = new Date(year - 10, 0, 1).toISOString();
+    this.sermonsRef = base.bindToState("sermons", {
+      context: this,
+      state: "sermons",
+      asArray: true,
+      queries: {
+        orderByChild: "date",
+        startAt: startDateString,
+        endAt: endDateString
+      }
+    });
   }
 
   componentWillUnMount() {
@@ -64,42 +89,46 @@ class App extends Component {
   loginCheck() {
     const self = this;
     var authHandler = function(user) {
-      if(user) {
+      if (user) {
         self.setState({
-          user : {
-            id : user.uid,
-            displayName : user.displayName,
-            email : user.email,
-            photoURL : user.photoURL,
-            provider : user.providerData[0].providerId
+          user: {
+            id: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+            photoURL: user.photoURL,
+            provider: user.providerData[0].providerId
           }
-        })
+        });
+      } else {
+        self.setState({ user: null });
       }
-      else {
-        self.setState({user : null})
-      }
-    }
+    };
 
-    if (! this.user) {
+    if (!this.user) {
       base.onAuth(authHandler);
     }
   }
 
   render() {
     var self = this;
-    var children = React.Children.map(this.props.children, function (child) {
-        return React.cloneElement(child, {
-          base:base,
-          congregations:self.state.congregations,
-          sermons:self.state.sermons,
-          admin:self.state.admin,
-          user: self.state.user
-        })
-      })
-
+    var children = React.Children.map(this.props.children, function(child) {
+      return React.cloneElement(child, {
+        base: base,
+        congregations: self.state.congregations,
+        sermons: self.state.sermons,
+        admin: self.state.admin,
+        user: self.state.user
+      });
+    });
+    if (this.state.loading) {
       return (
-        <div>{children}</div>
-      )
+        <div className="LoadingContainer">
+          <LoadingIndicator visible={this.state.loading} />
+        </div>
+      );
+    } else {
+      return <div>{children}</div>;
+    }
   }
 }
 
