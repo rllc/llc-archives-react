@@ -66,8 +66,9 @@ class App extends Component {
     var month = currentTime.getMonth();
     var day = currentTime.getDay();
 
+    //
     var endDateString = new Date(year, month + 1, day).toISOString();
-    var startDateString = new Date(year - 10, 0, 1).toISOString();
+    var startDateString = new Date(2012, 0, 1).toISOString();
     this.sermonsRef = base.bindToState("sermons", {
       context: this,
       state: "sermons",
@@ -80,7 +81,7 @@ class App extends Component {
     });
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
     base.removeBinding(this.congregationsRef);
     base.removeBinding(this.sermonsRef);
     base.removeBinding(this.adminRef);
