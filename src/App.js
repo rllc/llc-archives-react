@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Rebase from "re-base";
 import LoadingIndicator from "./modules/common/LoadingIndicator";
+import moment from "moment";
 
 var base = Rebase.createClass({
   apiKey: "AIzaSyD-uM9lWp5_MTYBauHlsbzJUhUkNE53zh4",
@@ -31,14 +32,8 @@ class App extends Component {
     });
 
     //initially load last 3 months of sermons
-    var currentTime = new Date();
-    var year = currentTime.getFullYear();
-    var month = currentTime.getMonth();
-    var day = currentTime.getDay();
-    var prev3Months = month > 3 ? 1 : month - 3;
-
-    var endDateString = new Date(year, month + 1, day).toISOString();
-    var startDateString = new Date(year, prev3Months+1, 1).toISOString();
+    var endDateString = moment().format();
+    var startDateString = moment().subtract(3, 'months').format();
 
     this.sermonsRef = base.bindToState("sermons", {
       context: this,
@@ -62,13 +57,9 @@ class App extends Component {
 
   componentDidMount() {
     //get the rest of the data
-    var currentTime = new Date();
-    var year = currentTime.getFullYear();
-    var month = currentTime.getMonth();
-    var day = currentTime.getDay();
+    var endDateString = moment().format();
+    var startDateString = moment().subtract(10, 'years').format();
 
-    var endDateString = new Date(year, month + 1, day).toISOString();
-    var startDateString = new Date(2012, 0, 1).toISOString();
     this.sermonsRef = base.bindToState("sermons", {
       context: this,
       state: "sermons",
