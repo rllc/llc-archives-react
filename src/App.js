@@ -18,7 +18,19 @@ class App extends Component {
       loading: true
     };
 
-    //filter for last 3 months
+    this.congregationsRef = base.bindToState("congregations", {
+      context: this,
+      state: "congregations",
+      asArray: true
+    });
+
+    this.adminRef = base.bindToState("administrators", {
+      context: this,
+      state: "admin",
+      asArray: true
+    });
+
+    //initially load last 3 months of sermons
     var currentTime = new Date();
     var year = currentTime.getFullYear();
     var month = currentTime.getMonth();
@@ -42,17 +54,6 @@ class App extends Component {
       }
     });
 
-    this.congregationsRef = base.bindToState("congregations", {
-      context: this,
-      state: "congregations",
-      asArray: true
-    });
-
-    this.adminRef = base.bindToState("administrators", {
-      context: this,
-      state: "admin",
-      asArray: true
-    });
   }
 
   componentWillMount() {
@@ -66,7 +67,6 @@ class App extends Component {
     var month = currentTime.getMonth();
     var day = currentTime.getDay();
 
-    //
     var endDateString = new Date(year, month + 1, day).toISOString();
     var startDateString = new Date(2012, 0, 1).toISOString();
     this.sermonsRef = base.bindToState("sermons", {
@@ -123,9 +123,7 @@ class App extends Component {
     });
     if (this.state.loading) {
       return (
-        <div className="LoadingContainer">
           <LoadingIndicator visible={this.state.loading} />
-        </div>
       );
     } else {
       return <div>{children}</div>;
