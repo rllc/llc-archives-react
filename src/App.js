@@ -58,7 +58,7 @@ class App extends Component {
   componentDidMount() {
     //get the rest of the data
     var endDateString = moment().format();
-    var startDateString = moment().subtract(10, 'years').format();
+    var startDateString = moment().subtract(3, 'years').format();
 
     this.sermonsRef = base.bindToState("sermons", {
       context: this,
