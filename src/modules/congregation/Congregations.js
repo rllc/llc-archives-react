@@ -81,7 +81,7 @@ class Congregations extends React.Component {
               value={self.state.searchTerm}
               onChange={self.handleChange}
               label="Search"
-              expandable
+            
               expandableIcon="search"
           />
         </HeaderRow>
